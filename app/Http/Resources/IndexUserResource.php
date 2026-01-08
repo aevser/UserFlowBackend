@@ -17,7 +17,7 @@ class IndexUserResource extends JsonResource
         return [
             'id' => $this->id,
             'nickname' => $this->nickname,
-            'avatar' => $this->avatar,
+            'avatar' => $this->avatar_url,
             'created_at' => $this->created_at
         ];
     }
