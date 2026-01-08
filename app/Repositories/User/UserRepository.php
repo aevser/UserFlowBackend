@@ -4,7 +4,9 @@ namespace App\Repositories\User;
 
 use App\Constants\SortAndPaginate;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Carbon;
 
 class UserRepository
 {
@@ -26,5 +28,14 @@ class UserRepository
                 'avatar' => $avatar
             ]
         );
+    }
+
+    public function deleteOlderThanMinutes(int $minutes): bool
+    {
+        $time = Carbon::now()->subMinutes($minutes);
+
+        return $this->user->query()
+            ->where('created_at', '<=', $time)
+            ->delete();
     }
 }
