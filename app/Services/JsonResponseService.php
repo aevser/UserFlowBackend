@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 
 class JsonResponseService
 {
-    public function success(int $code, mixed $data, ?string $message = null, array $meta = []): JsonResponse
+    public function success(int $code, mixed $data, ?string $message = null, mixed $meta = []): JsonResponse
     {
         $response = ['code' => $code];
 
@@ -22,7 +22,7 @@ class JsonResponseService
 
         if (!empty($meta))
         {
-            $response['meta'] = $this->prepareMeta(data: $data);
+            $response['meta'] = $this->prepareMeta(data: $meta);
         }
 
         return response()->json

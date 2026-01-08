@@ -28,11 +28,12 @@ class UserController extends Controller
         return $this->jsonResponseService->success
         (
             code: JsonResponse::HTTP_OK,
-            data: IndexUserResource::collection($users)
+            data: IndexUserResource::collection($users),
+            meta: $users
         );
     }
 
-    public function registration(CreateUserRequest $request): JsonResponse
+    public function store(CreateUserRequest $request): JsonResponse
     {
         $user = $this->userService->create
         (
