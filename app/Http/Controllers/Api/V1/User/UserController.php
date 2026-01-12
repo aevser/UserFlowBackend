@@ -11,6 +11,7 @@ use App\Repositories\User\UserRepository;
 use App\Services\JsonResponseService;
 use App\Services\User\UserService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {
@@ -40,6 +41,8 @@ class UserController extends Controller
             nickname: $request->validated('nickname'),
             avatar: $request->file('avatar')
         );
+
+        Redis::setex('User: ' . $user->id, 3600, json_encode($user->toArray()));
 
         return $this->jsonResponseService->success
         (
