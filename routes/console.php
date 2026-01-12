@@ -8,4 +8,7 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::job(new \App\Jobs\Users\Delete(env('OLD_USER_MINUTES')))->everyMinute();
+Schedule::job(new \App\Jobs\Users\Delete
+(
+    config('settings.old_user_minutes')
+))->everyMinute();
