@@ -27,13 +27,7 @@
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->nickname }}</td>
                                 <td>
-                                    <img
-                                        src="{{ asset('storage/' . $user->avatar) }}"
-                                        alt="Avatar"
-                                        width="50"
-                                        height="50"
-                                        style="object-fit: cover; border-radius: 50%;"
-                                    >
+                                    <img src="{{ Storage::url($user->avatar) }}" alt="Avatar" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
                                 </td>
 
                                 <td>{{ $user->created_at }}</td>

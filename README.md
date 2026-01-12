@@ -21,13 +21,9 @@ cd UserFlowBackend
 cp .env.example .env
 ```
 
-### Устанавливаем переменные окружения: 
+### Настраиваем переменные окружения: 
 ```bash
 OLD_USER_MINUTES=60 ( опционально )
-REDIS_CLIENT=predis
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
 
 ```
 
@@ -46,7 +42,7 @@ docker-compose up -d --build
 ```bash
 docker exec -it user_flow_app composer install
 docker exec -it user_flow_app php artisan key:generate
-docker exec -it user_flow_app php artisan migrate
+docker exec -it user_flow_app php artisan migrate --seed
 docker exec -it user_flow_app php artisan storage:link
 ```
 
@@ -57,8 +53,12 @@ docker exec -it user_flow_app php artisan optimize:clear
 
 ### Открываем в браузере:
 ```bash
-API: http://localhost:8000/v1/users
 Страница пользователей: http://localhost:8000/users
+```
+
+### Команда для удаления старых пользователей:
+```bash
+docker exec -it user_flow_app php artisan schedule:run
 ```
 
 ### API
@@ -71,14 +71,16 @@ api/v1
 
 ### Endpoints
 
-```
+```bash
 GET /api/v1/users - получить список пользователей
+
 perPage - опционально ( кол-во записей на странице )
 page - опционально ( переключатель страниц )
 ```
 
-```
+```bash
 POST /api/v1/users - создать пользователя
+
 nickname - required
 avatar - опционально
 ```
