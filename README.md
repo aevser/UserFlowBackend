@@ -46,11 +46,6 @@ docker exec -it user_flow_app php artisan migrate --seed
 docker exec -it user_flow_app php artisan storage:link
 ```
 
-### Сбрасываем кеш конфигурации Laravel:
-```bash
-docker exec -it user_flow_app php artisan optimize:clear
-```
-
 ### Открываем в браузере:
 ```bash
 Страница пользователей: http://localhost:8000/users
